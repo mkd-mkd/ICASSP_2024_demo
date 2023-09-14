@@ -4,11 +4,11 @@
    
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>CONSIDERING TEMPORAL CONNECTION BETWEEN TURNS FOR CONVERSATIONAL SPEECH SYNTHESIS</title>
+<title>M2-CTTS: End-to-End Multi-scale Multi-modal Conversational Text-to-Speech Synthesis</title>
 <meta name="generator" content="Jekyll v3.9.0">
-<meta property="og:title" content="CONSIDERING TEMPORAL CONNECTION BETWEEN TURNS FOR CONVERSATIONAL SPEECH SYNTHESIS">
+<meta property="og:title" content="M2-CTTS: End-to-End Multi-scale Multi-modal Conversational Text-to-Speech Synthesis">
 <meta property="og:locale" content="en_US">
-<link rel="canonical" href="https://mkd-mkd.github.io/icassp2024/">
+<link rel="canonical" href="https://happylittlecat2333.github.io/icassp2023/">
 <meta property="og:url" content="https://syang1993.github.io/icassp2023/">
 <meta name="twitter:card" content="summary">
 <!-- End Jekyll SEO tag -->
@@ -26,32 +26,29 @@
     </section>
 
     <section class="main-content">
-      <h1 id=""><center> CONSIDERING TEMPORAL CONNECTION BETWEEN TURNS FOR CONVERSATIONAL SPEECH SYNTHESIS </center></h1>
+      <h1 id=""><center> M<sup>2</sup>-CTTS: End-to-End Multi-scale Multi-modal Conversational Text-to-Speech Synthesis </center></h1>
       <!-- <h1 id=""><center> Evaluation </center></h1> -->
       
 
-<center> Kangdi Mei, Zhaoci Liu, Huipeng Du, Hengyu Li, Yang Ai, Liping Chen, Zhenhua Ling</center>
+<center> Jinlong Xue<sup>1</sup>, Yayue Deng<sup>1</sup>, Fengping Wang<sup>1</sup>, Ya Li<sup>1</sup>, Yingming Gao<sup>1</sup>, Jianhua Tao<sup>2</sup>, Jianqing Sun<sup>3</sup>, Jiaen Liang<sup>3</sup> </center>
 <br>
-<center> National Engineering Research Center of Speech and Language Information Processing,</center>
-<center> University of Science and Technology of China, Hefei, P.R.China</center>
+<center> <sup>1</sup> Beijing University of Posts and Telecommunications, Beijing, China</center>
+<center> <sup>2</sup> NLPR, Institute of Automation, Chinese Academy of Sciences, Beijing, China</center>
+<center> <sup>3</sup> Unisound AI Technology Co., Ltd, Beijing, China</center>
+
 
 
 <h2 id="abstract">Abstract</h2>
-<p>Conversational speech synthesis aims to synthesize speech of an individual speaker based on history 
-conversation. However, most studies in conversational speech synthesis only focus on the synthesis
-performance of the current speaker’s turn and neglect the temporal relationship between turns of interlocutors. 
-Therefore, we consider the temporal connection between turns for conversational speech synthesis, 
-which is crucial for the naturalness and coherence of conversations. 
-Specifically, we focus on the situation where there is no overlap between turns and only one history turn is considered. 
-In our task, we propose an acoustic model that leverages multi-modal (including text and speech) 
-information from previous turn to predict
-the acoustic features of not only current turn but also the inter-turn
-gap. The model is designed based on MQTTS and incorporates the
-global acoustic representation and BERT-based local semantic representation of previous turn 
-when predicting the acoustic features of
-each frame. Experimental results demonstrate that with the introduction of global acoustic information 
-and local semantic information, our model achieves better performance in temporal connection 
-between turns and content synthesis of current turn.</p>
+<p>Conversational text-to-speech (TTS) aims to synthesize speech with proper prosody of reply based on the historical
+conversation. However, it is still a challenge to comprehensively model the conversation, and a majority of
+conversational TTS systems only focus on extracting global information and omit local prosody features, which contain
+important fine-grained information like keywords and emphasis. Moreover, it is insufficient to only consider the textual
+features, and acoustic features also contain various prosody information. Hence, we propose M<sup>2</sup>-CTTS, an end-to-end
+multi-scale multi-modal conversational text-to-speech system, aiming to comprehensively utilize historical conversation
+and enhance prosodic expression. More specifically, we design a textual context module and an acoustic context module
+with both coarse-grained and fine-grained modeling. Experimental results demonstrate that our model mixed with
+fine-grained context information and additionally considering acoustic features achieves better prosody performance and
+naturalness in CMOS tests.</p>
 
 <h2><p class="toc_title">Contents</p></h2>
 <div id="toc_container">
@@ -71,7 +68,10 @@ between turns and content synthesis of current turn.</p>
   <figcaption style="text-align:center;">
     </font>
     <font size=3>
-      Fig.1 Overview of our proposed model.
+      Fig.1 Overview of our proposed M2-CTTS model. M<sup>2</sup>-CTTS is based on FastSpeech2 and HiFi-GAN. 
+      We design a Textual Context Module (TCM) and an Acoustic Context Module (ACM) for modeling. 
+      We develop a Text Utterance-Level Module (TUM) and a Text Phoneme-Level Module (TPM) in TCM and develop a Wave Utterance-Level Module (WUM) and a Wave Phoneme-Level Module (WPM) in ACM. 
+      Moreover, we use Conditional Decoder and Prosody Predictor Module (PPM) to enhance the expressiveness of the generated speech.
     </font>
   </figcaption><br><br>
   </p>
@@ -81,32 +81,43 @@ between turns and content synthesis of current turn.</p>
 
 <a name="2"><h2>Evaluation on different models</h2></a>
 <p>
-GT: reconstructed from groundtruth. <br>
-M1: baseline model. <br>
-M2: baseline model with global acoustic information.  <br>
-M3: baseline model with local semantic information.  <br>
-M4: baseline model with global acoustic information and local semantic information. <br>
+M0: reconstructed from mel spectrogram. <br>
+M1: baseline FastSpeech2 model. <br>
+M2: baseline model with Tu.  <br>
+M3: baseline model with Wu.  <br>
+M4: baseline model with Tu and Tp. <br>
+M5: baseline model with Wu and Wp. <br>
+M6: baseline model with Tu and Wu. <br>
+M7: baseline model with Tu, Tp, Wu and Wp. <br>
 </p>
 
 <h3>Sample 1</h3>
-<p>A: yeah we'd my mom does all the cooking and i do all the cleaning afterwards.<br>B: well is there uh any thing that your mother would make every year at christmas that's so special that you always enjoyed.</b></p>
+<h4>history</h4>
+<p><audio src="samples/23/history/history.wav" controls="" preload=""></audio></p>
+<p>A: a big one would be nice.<br>B: how about this one? it's our biggest -- sixteen' in diameter.<br>A: oh, yes, i like that one, but it's too heavy.<br>B: ok, try this one. it's made of aluminum.<br><b>A: oh, yes! this is much better. but it has an aluminum handle.</b></p>
 <table>
   <thead>
     <tr>
-      <th style="text-align: center"><strong>GT</strong></th>
+      <th style="text-align: center"><strong>M0</strong></th>
       <th style="text-align: center"><strong>M1</strong></th>
       <th style="text-align: center"><strong>M2</strong></th>
       <th style="text-align: center"><strong>M3</strong></th>
       <th style="text-align: center"><strong>M4</strong></th>
+      <th style="text-align: center"><strong>M5</strong></th>
+      <th style="text-align: center"><strong>M6</strong></th>
+      <th style="text-align: center"><strong>M7</strong></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><audio src="wavs/GT/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M1/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M2/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M3/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M4/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-reconstruct.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-v4-base.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-v4-base-Tu.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-v4-base-Wu.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-v4-base-Tu-Tp.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-v4-base-Wu-Wp.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-v4-base-Tu-Wu.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="samples/23/current/6_1_d23.output-v5-all-predictor-saln.wav" controls="" preload=""></audio></td>
   </tbody>
 </table>
 <br>
