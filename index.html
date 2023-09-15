@@ -37,21 +37,16 @@
 
 
 <h2 id="abstract">Abstract</h2>
-<p>Conversational speech synthesis aims to synthesize speech of an individual speaker based on history 
-conversation. However, most studies in conversational speech synthesis only focus on the synthesis
-performance of the current speaker’s turn and neglect the temporal relationship between turns of interlocutors. 
-Therefore, we consider the temporal connection between turns for conversational speech synthesis, 
-which is crucial for the naturalness and coherence of conversations. 
-Specifically, we focus on the situation where there is no overlap between turns and only one history turn is considered. 
-In our task, we propose an acoustic model that leverages multi-modal (including text and speech) 
-information from previous turn to predict
-the acoustic features of not only current turn but also the inter-turn
-gap. The model is designed based on MQTTS and incorporates the
-global acoustic representation and BERT-based local semantic representation of previous turn 
-when predicting the acoustic features of
-each frame. Experimental results demonstrate that with the introduction of global acoustic information 
-and local semantic information, our model achieves better performance in temporal connection 
-between turns and content synthesis of current turn.</p>
+<p>Conversational speech synthesis aims to synthesize speech of an individual speaker based on history conversation. However, most
+studies in conversational speech synthesis only focus on the synthesis performance of the current speaker’s turn and neglect the
+temporal relationship between turns of interlocutors. Therefore, we consider the temporal connection between turns for conversational
+speech synthesis, which is crucial for the naturalness and coherence of conversations. Specifically, this paper formulates a task in
+which there is no overlap between turns and only one history turn is considered. To complete this task, an acoustic model is
+proposed which leverages multi-modal (including text and speech) information from previous turn to predict the acoustic features of
+not only current turn but also the inter-turn gap. The model is designed based on MQTTS and incorporates the global acoustic
+representation and BERT-based local semantic representation of previous turn when predicting the acoustic features of each frame.
+Experimental results demonstrate that with the introduction of global acoustic information and local semantic information, our model
+achieves better performance on the temporal connection between turns and the quality of synthetic speech.</p>
 
 <h2><p class="toc_title">Contents</p></h2>
 <div id="toc_container">
