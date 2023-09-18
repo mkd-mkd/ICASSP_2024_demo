@@ -37,16 +37,21 @@
 
 
 <h2 id="abstract">Abstract</h2>
-<p>Conversational speech synthesis aims to synthesize speech of an individual speaker based on history conversation. However, most
-studies in conversational speech synthesis only focus on the synthesis performance of the current speaker's turn and neglect the
-temporal relationship between turns of interlocutors. Therefore, we consider the temporal connection between turns for conversational
-speech synthesis, which is crucial for the naturalness and coherence of conversations. Specifically, this paper formulates a task in
-which there is no overlap between turns and only one history turn is considered. To complete this task, an acoustic model is
-proposed which leverages multi-modal (including text and speech) information from previous turn to predict the acoustic features of
-not only current turn but also the inter-turn gap. The model is designed based on MQTTS and incorporates the global acoustic
-representation and BERT-based local semantic representation of previous turn when predicting the acoustic features of each frame.
-Experimental results demonstrate that with the introduction of global acoustic information and local semantic information, our model
-achieves better performance on the temporal connection between turns and the quality of synthetic speech.</p>
+<p>Conversational speech synthesis aims to synthesize speech of an individual speaker based on history 
+conversation. However, most studies in conversational speech synthesis only focus on the synthesis
+performance of the current speaker’s turn and neglect the temporal relationship between turns of interlocutors. 
+Therefore, we consider the temporal connection between turns for conversational speech synthesis, 
+which is crucial for the naturalness and coherence of conversations. 
+Specifically, we focus on the situation where there is no overlap between turns and only one history turn is considered. 
+In our task, we propose an acoustic model that leverages multi-modal (including text and speech) 
+information from previous turn to predict
+the acoustic features of not only current turn but also the inter-turn
+gap. The model is designed based on MQTTS and incorporates the
+global acoustic representation and BERT-based local semantic representation of previous turn 
+when predicting the acoustic features of
+each frame. Experimental results demonstrate that with the introduction of global acoustic information 
+and local semantic information, our model achieves better performance in temporal connection 
+between turns and content synthesis of current turn.</p>
 
 <h2><p class="toc_title">Contents</p></h2>
 <div id="toc_container">
@@ -60,7 +65,7 @@ achieves better performance on the temporal connection between turns and the qua
 <div>
   <br />
   <p style="text-align: center">
-    <img src="./framework2.png" width="1200" height="600"/>
+    <img src="./framework.jpg" width="1200" height="600"/>
   </p>
   <p>
   <figcaption style="text-align:center;">
@@ -85,6 +90,29 @@ M4: baseline model with global acoustic information and local semantic informati
 
 
 <h3>Sample 1</h3>
+<p>A: w- they can be blocked they can be blocked.<br><b>B: well or they can be blocked indeed i i don't i don't know how that works if uh if if if parents can block computers from kids /p/ or or from porn sites then that's great.</b></p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>GT</strong></th>
+      <th style="text-align: center"><strong>M1</strong></th>
+      <th style="text-align: center"><strong>M2</strong></th>
+      <th style="text-align: center"><strong>M3</strong></th>
+      <th style="text-align: center"><strong>M4</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><audio src="wavs/GT/9_fe_03_11664_1_32648_gap_240_249.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M1/9_fe_03_11664_1_32648_gap_240_249.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M2/9_fe_03_11664_1_32648_gap_240_249.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M3/9_fe_03_11664_1_32648_gap_240_249.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M4/9_fe_03_11664_1_32648_gap_240_249.wav" controls="" preload=""></audio></td>
+  </tbody>
+</table>
+<br>
+<br>
+<h3>Sample 2</h3>
 <p>A: um so we're supposed to talk about sports is that correct /p/ okay tv sports um i don't spend many hours a week watching it but i like basketball. <br><b>B: well that's about like i am i only watch football and it's only when the kansas city chiefs are playing.</b><br>*/p/ means intra-speaker pause.*</b></p>
 <table>
   <thead>
@@ -107,7 +135,7 @@ M4: baseline model with global acoustic information and local semantic informati
 </table>
 <br>
 <br>
-<h3>Sample 2</h3>
+<h3>Sample 3</h3>
 <p>A: yeah that's the same with me. <br><b>B: right yeah so you relax and then you sit and relaxes and /p/ the germs have uh /p/ a way to play with your body.</b><br>*/p/ means intra-speaker pause.*</b></p>
 <table>
   <thead>
@@ -130,7 +158,7 @@ M4: baseline model with global acoustic information and local semantic informati
 </table>
 <br>
 <br>
-<h3>Sample 3</h3>
+<h3>Sample 4</h3>
 <p>A: but you definitely wouldn't miss the food. <br><b>B: no guess i guess not maybe um /p/ you know not the american food maybe like indian food and.</b><br>*/p/ means intra-speaker pause.*</b></p>
 <table>
   <thead>
@@ -153,7 +181,7 @@ M4: baseline model with global acoustic information and local semantic informati
 </table>
 <br>
 <br>
-<h3>Sample 4</h3>
+<h3>Sample 5</h3>
 <p>A: um m- may i ask what ah class you teach. <br><b>B: most of my classes ah at this point have been geared towards mathematics.</b></p>
 <table>
   <thead>
@@ -172,29 +200,6 @@ M4: baseline model with global acoustic information and local semantic informati
       <td style="text-align: left"><audio src="wavs/M2/16_fe_03_07011_0_52156_gap_303_389.wav" controls="" preload=""></audio></td>
       <td style="text-align: left"><audio src="wavs/M3/16_fe_03_07011_0_52156_gap_303_389.wav" controls="" preload=""></audio></td>
       <td style="text-align: left"><audio src="wavs/M4/16_fe_03_07011_0_52156_gap_303_389.wav" controls="" preload=""></audio></td>
-  </tbody>
-</table>
-<br>
-<br>
-<h3>Sample 5</h3>
-<p>A: yeah we'd my mom does all the cooking and i do all the cleaning afterwards.<br><b>B: well is there uh any thing that your mother would make every year at christmas that's so special that you always enjoyed.</b></p>
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center"><strong>GT</strong></th>
-      <th style="text-align: center"><strong>M1</strong></th>
-      <th style="text-align: center"><strong>M2</strong></th>
-      <th style="text-align: center"><strong>M3</strong></th>
-      <th style="text-align: center"><strong>M4</strong></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left"><audio src="wavs/GT/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M1/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M2/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M3/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M4/1_fe_03_10601_2_16213_gap_778_795.wav" controls="" preload=""></audio></td>
   </tbody>
 </table>
 <br>
@@ -223,7 +228,7 @@ M4: baseline model with global acoustic information and local semantic informati
 <br>
 <br>
 <h3>Sample 7</h3>
-<p>A: what do you think they're doing i mean? <br><b>B: i i don't know jeopardy's not on this late.</b></p>
+<p>A: gives -em /p/ not a very good outlook on everything <br><b>B: no /p/ kind of makes you think quite alone.</b><br>*/p/ means intra-speaker pause.*</b></p>
 <table>
   <thead>
     <tr>
@@ -236,11 +241,11 @@ M4: baseline model with global acoustic information and local semantic informati
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left"><audio src="wavs/GT/8_FE_03_00545_8_19930_gap_158_294.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M1/8_FE_03_00545_8_19930_gap_158_294.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M2/8_FE_03_00545_8_19930_gap_158_294.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M3/8_FE_03_00545_8_19930_gap_158_294.wav" controls="" preload=""></audio></td>
-      <td style="text-align: left"><audio src="wavs/M4/8_FE_03_00545_8_19930_gap_158_294.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/GT/3_FE_03_00824_1_42082_gap_235_340.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M1/3_FE_03_00824_1_42082_gap_235_340.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M2/3_FE_03_00824_1_42082_gap_235_340.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M3/3_FE_03_00824_1_42082_gap_235_340.wav" controls="" preload=""></audio></td>
+      <td style="text-align: left"><audio src="wavs/M4/3_FE_03_00824_1_42082_gap_235_340.wav" controls="" preload=""></audio></td>
   </tbody>
 </table>
 <br>
